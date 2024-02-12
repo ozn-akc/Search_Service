@@ -22,17 +22,4 @@ public class Product {
     Integer maxGuests;
     Integer bedrooms;
     Integer bathrooms;
-
-    public boolean doesProductMatchCriteria(SearchCriteria search) {
-        return (address.getCountry().equals(search.getCountry())
-                && search.getGuests() <= maxGuests
-                && rentedDays.stream().noneMatch(rented -> search.getDateRange().stream()
-                .anyMatch(rented::equals)));
-    }
-
-    public boolean doesProductMatchCriteria(FilterCriteria filter) {
-        return true;
-    }
-
-
 }

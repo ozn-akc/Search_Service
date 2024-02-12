@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="de.seven.search.domain.model.ProductTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-02-07T14:56:21" hostname="seven-Legion-Y720T-34ASU" time="0.024">
-  <properties/>
-  <testcase name="productMatcheSearchCriteriaDateTest()" classname="de.seven.search.domain.model.ProductTest" time="0.017"/>
-  <testcase name="productDoesNotMatcheSearchCriteriaGuestsTest()" classname="de.seven.search.domain.model.ProductTest" time="0.002"/>
-  <testcase name="productDoesNotMatcheSearchCriteriaDateTest()" classname="de.seven.search.domain.model.ProductTest" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

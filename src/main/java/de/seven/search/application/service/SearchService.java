@@ -22,7 +22,7 @@ public class SearchService {
     public List<Product> searchProducts(SearchCriteria search){
         List<Product> result = productRepository.findAll();
         return result.stream()
-                .filter(product -> product.doesProductMatchCriteria(search)).toList();
+                .filter(search::doesProductMatchSearchCriteria).toList();
     }
 
     /**
@@ -33,7 +33,7 @@ public class SearchService {
      */
     public List<Product> searchProducts(SearchCriteria search, FilterCriteria filter){
         return searchProducts(search).stream()
-                .filter(product -> product.doesProductMatchCriteria(filter)).toList();
+                .filter(filter::doesProductMatchFilterCriteria).toList();
     }
 
 }

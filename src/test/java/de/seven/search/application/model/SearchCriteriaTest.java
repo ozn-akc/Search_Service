@@ -1,22 +1,22 @@
-package de.seven.search.domain.model;
+package de.seven.search.application.model;
 
-import de.seven.search.application.model.FilterCriteria;
-import de.seven.search.application.model.SearchCriteria;
+import de.seven.search.domain.model.Address;
+import de.seven.search.domain.model.Product;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-class ProductTest {
+class SearchCriteriaTest {
 
     private final String COUNTRY = "Country";
     private final Integer MAX_GUESTS = 3;
     private final Integer DATE_INDEX = 0;
     private final Integer DATE_ITERATIONS = 4;
-    private final Product toTest = createProduct();
+    private final Product product = createProduct();
 
     /**
      * Test der überprüft, dass die Produkt-Methode doesProductMatchCriteria ein Produkt außerhalb der gebuchten Zeiten verfügbar ist
@@ -24,7 +24,7 @@ class ProductTest {
     @Test
     void productMatchesSearchCriteriaDateTest() {
         //Assign
-        SearchCriteria criteria = SearchCriteria.builder()
+        SearchCriteria toTest = SearchCriteria.builder()
                 .country(COUNTRY)
                 .guests(MAX_GUESTS)
                 .dateRange(createDates(DATE_ITERATIONS, 2))
@@ -32,7 +32,7 @@ class ProductTest {
         boolean expected = true;
 
         //Act
-        boolean result = toTest.doesProductMatchCriteria(criteria);
+        boolean result = toTest.doesProductMatchSearchCriteria(product);
 
         //Assert
         assertEquals(expected, result);
@@ -44,7 +44,7 @@ class ProductTest {
     @Test
     void productDoesNotMatcheSearchCriteriaDateTest() {
         //Assign
-        SearchCriteria criteria = SearchCriteria.builder()
+        SearchCriteria toTest = SearchCriteria.builder()
                 .country(COUNTRY)
                 .guests(MAX_GUESTS)
                 .dateRange(createDates(DATE_INDEX, 3))
@@ -52,7 +52,7 @@ class ProductTest {
         boolean expected = false;
 
         //Act
-        boolean result = toTest.doesProductMatchCriteria(criteria);
+        boolean result = toTest.doesProductMatchSearchCriteria(product);
 
         //Assert
         assertEquals(expected, result);
@@ -64,8 +64,7 @@ class ProductTest {
     @Test
     void productDoesNotMatcheSearchCriteriaGuestsTest() {
         //Assign
-        Product toTest = createProduct();
-        SearchCriteria criteria = SearchCriteria.builder()
+        SearchCriteria toTest = SearchCriteria.builder()
                 .country(COUNTRY)
                 .guests(MAX_GUESTS+1)
                 .dateRange(createDates(DATE_ITERATIONS, 2))
@@ -73,7 +72,7 @@ class ProductTest {
         boolean expected = false;
 
         //Act
-        boolean result = toTest.doesProductMatchCriteria(criteria);
+        boolean result = toTest.doesProductMatchSearchCriteria(product);
 
         //Assert
         assertEquals(expected, result);

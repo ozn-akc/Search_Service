@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.seven.search.application.model.FilterCriteriaTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2024-02-12T15:25:16" hostname="ozan-ThinkPad-E14-Gen-2" time="0.029">
+  <properties/>
+  <testcase name="priceIsInPriceRangeBothValuesPresentTest()" classname="de.seven.search.application.model.FilterCriteriaTest" time="0.01"/>
+  <testcase name="priceIsInPriceRangeNoValuePresentTest()" classname="de.seven.search.application.model.FilterCriteriaTest" time="0.001"/>
+  <testcase name="hasSufficientBedsTest()" classname="de.seven.search.application.model.FilterCriteriaTest" time="0.001"/>
+  <testcase name="containsAllAttributesNoValuesTest()" classname="de.seven.search.application.model.FilterCriteriaTest" time="0.001"/>
+  <testcase name="containsAllBedsTest()" classname="de.seven.search.application.model.FilterCriteriaTest" time="0.001"/>
+  <testcase name="hasSufficientRatingTest()" classname="de.seven.search.application.model.FilterCriteriaTest" time="0.002"/>
+  <testcase name="containsAllAttributesEmptyTest()" classname="de.seven.search.application.model.FilterCriteriaTest" time="0.001"/>
+  <testcase name="hasSufficientBathroomsTest()" classname="de.seven.search.application.model.FilterCriteriaTest" time="0.001"/>
+  <testcase name="priceIsInPriceRangeMinValuePresentTest()" classname="de.seven.search.application.model.FilterCriteriaTest" time="0.0"/>
+  <testcase name="priceIsInPriceRangeMaxValuePresentTest()" classname="de.seven.search.application.model.FilterCriteriaTest" time="0.0"/>
+  <testcase name="hasSufficientBedroomsTestTest()" classname="de.seven.search.application.model.FilterCriteriaTest" time="0.0"/>
+  <testcase name="containsAllAttributesWithValuesTest()" classname="de.seven.search.application.model.FilterCriteriaTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
