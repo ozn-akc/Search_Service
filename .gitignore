@@ -1,0 +1,52 @@
+# IntelliJ IDEA
+.idea/
+
+# Gradle
+.gradle/
+gradle/
+build/
+
+# Maven
+target/
+
+# Logs
+*.log
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Temporary Files
+*.tmp
+*.temp
+*.swp
+
+# IDE-specific files
+*.iml
+*.ipr
+*.iws
+
+# Compiled bytecode
+*.class
+
+# Application-specific files
+/application.properties
+/application.yml
+
+# Dependencies
+/bin/
+/lib/
+*.jar
+
+# Editor-specific files
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Package Files
+*.jar
+*.war
+*.ear
