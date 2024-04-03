@@ -1,6 +1,8 @@
 package de.seven.search.application.model;
 
 import de.seven.search.domain.model.Address;
+import de.seven.search.domain.model.Bed;
+import de.seven.search.domain.model.BedType;
 import de.seven.search.domain.model.Product;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SearchCriteriaTest {
 
     private final String COUNTRY = "Country";
+    private final List<Bed> BEDS = List.of(Bed.builder().amount(3).type(BedType.SCHLAFCOUCH).build());
     private final Integer MAX_GUESTS = 3;
     private final Integer DATE_INDEX = 0;
     private final Integer DATE_ITERATIONS = 4;
@@ -87,7 +90,7 @@ class SearchCriteriaTest {
         return Product.builder()
                 .rentedDays(createDates(DATE_INDEX, DATE_ITERATIONS))
                 .address(Address.builder().country(COUNTRY).build())
-                .maxGuests(MAX_GUESTS)
+                .beds(BEDS)
                 .build();
     }
 

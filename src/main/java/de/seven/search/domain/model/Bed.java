@@ -1,12 +1,15 @@
 package de.seven.search.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Objects;
 
-@Getter
+
 @Builder
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@Getter
 public class Bed {
     Integer amount;
     BedType type;

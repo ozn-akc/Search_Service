@@ -3,7 +3,9 @@ package de.seven.search.application.model;
 import de.seven.search.domain.model.Attribute;
 import de.seven.search.domain.model.Bed;
 import de.seven.search.domain.model.BedType;
+import de.seven.search.domain.model.Price;
 import de.seven.search.domain.model.Review;
+import de.seven.search.domain.model.Unit;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -19,9 +21,9 @@ class FilterCriteriaTest {
         FilterCriteria toTest = FilterCriteria.builder().maxPrice(10.0).minPrice(4.0).build();
 
         //Act
-        boolean inRangeResult = toTest.isInPriceRange(4.0);
-        boolean outOfRangeOverResult = toTest.isInPriceRange(3.0);
-        boolean outOfRangeUnderResult = toTest.isInPriceRange(11.0);
+        boolean inRangeResult = toTest.isInPriceRange(new Price(4.0, Unit.EURO));
+        boolean outOfRangeOverResult = toTest.isInPriceRange(new Price(3.0, Unit.EURO));
+        boolean outOfRangeUnderResult = toTest.isInPriceRange(new Price(11.0, Unit.EURO));
 
         //Assert
         assertTrue(inRangeResult);
@@ -36,8 +38,8 @@ class FilterCriteriaTest {
         boolean expected = true;
 
         //Act
-        boolean inRangeResult = toTest.isInPriceRange(4.0);
-        boolean outOfRangeResult = toTest.isInPriceRange(11.0);
+        boolean inRangeResult = toTest.isInPriceRange(new Price(4.0, Unit.EURO));
+        boolean outOfRangeResult = toTest.isInPriceRange(new Price(11.0, Unit.EURO));
 
         //Assert
 
@@ -53,8 +55,8 @@ class FilterCriteriaTest {
         boolean expected = true;
 
         //Act
-        boolean inRangeResult = toTest.isInPriceRange(4.0);
-        boolean outOfRangeResult = toTest.isInPriceRange(11.0);
+        boolean inRangeResult = toTest.isInPriceRange(new Price(4.0, Unit.EURO));
+        boolean outOfRangeResult = toTest.isInPriceRange(new Price(11.0, Unit.EURO));
 
         //Assert
         assertTrue(inRangeResult);
@@ -67,8 +69,8 @@ class FilterCriteriaTest {
         FilterCriteria toTest = FilterCriteria.builder().build();
 
         //Act
-        boolean inRangeResult = toTest.isInPriceRange(4.0);
-        boolean outOfRangeResult = toTest.isInPriceRange(11.0);
+        boolean inRangeResult = toTest.isInPriceRange(new Price(4.0, Unit.EURO));
+        boolean outOfRangeResult = toTest.isInPriceRange(new Price(11.0, Unit.EURO));
 
         //Assert
         assertTrue(inRangeResult);
@@ -144,8 +146,8 @@ class FilterCriteriaTest {
     @Test
     void hasSufficientRatingTest() {
         //Assign
-        List<Review> badReviews = List.of(Review.builder().value(2).build(), Review.builder().value(4).build());
-        List<Review> goodReviews = List.of(Review.builder().value(5).build(), Review.builder().value(4).build());
+        List<Review> badReviews = List.of(Review.builder().score(2).build(), Review.builder().score(4).build());
+        List<Review> goodReviews = List.of(Review.builder().score(5).build(), Review.builder().score(4).build());
         FilterCriteria toTest = FilterCriteria.builder().minReviewRating(4).build();
 
         //Act

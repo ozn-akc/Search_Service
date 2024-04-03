@@ -1,11 +1,14 @@
 package de.seven.search.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Builder;
 import lombok.Getter;
 
-@Getter
+
 @Builder
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@Getter
 public class Review {
-    Integer value;
-    User user;
+    Integer score;
+    String userId;
 }

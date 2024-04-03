@@ -2,6 +2,7 @@ package de.seven.search.application.model;
 
 import de.seven.search.domain.model.Attribute;
 import de.seven.search.domain.model.Bed;
+import de.seven.search.domain.model.Price;
 import de.seven.search.domain.model.Product;
 import de.seven.search.domain.model.Review;
 import lombok.Builder;
@@ -32,15 +33,15 @@ public class FilterCriteria {
                 hasSufficientBathrooms(product.getBathrooms());
     }
 
-    public boolean isInPriceRange(Double price){
+    public boolean isInPriceRange(Price price){
         if( minPrice == null && maxPrice == null){
             return true;
         }else if(minPrice == null){
-            return price <= maxPrice;
+            return price.getValue() <= maxPrice;
         }else if(maxPrice == null){
-            return minPrice <= price;
+            return minPrice <= price.getValue();
         }
-        return minPrice <= price && price <= maxPrice;
+        return minPrice <= price.getValue() && price.getValue() <= maxPrice;
     }
 
     public boolean containsAllAttributes(List<Attribute> attributeList){
@@ -52,7 +53,7 @@ public class FilterCriteria {
     }
 
     public boolean hasSufficientRating(List<Review> rating){
-        return minReviewRating == null || minReviewRating <= rating.stream().mapToInt(Review::getValue).average().orElse(0) ;
+        return minReviewRating == null || minReviewRating <= rating.stream().mapToInt(Review::getScore).average().orElse(0) ;
     }
 
     public boolean hasSufficientBeds(List<Bed> beds){
