@@ -1,7 +1,8 @@
 package de.seven.search.adapter.secondary.postgresql;
 
 import de.seven.search.application.adapter.secondary.ProductRepository;
-import de.seven.search.adapter.secondary.postgresql.model.Product;
+import de.seven.search.adapter.secondary.postgresql.model.ProductDTO;
+import de.seven.search.domain.model.Product;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
@@ -18,28 +19,28 @@ public class PostgreSQLRepository implements ProductRepository {
     private final EntityManager entityManager;
 
     @Override
-    public de.seven.search.domain.model.Product save(de.seven.search.domain.model.Product product) {
-        Product data = Product.fromDomainProduct(product);
+    public Product save(Product product) {
+        ProductDTO data = ProductDTO.fromDomainProduct(product);
         entityManager.persist(data);
         entityManager.flush();
         return data.toDomainProduct();
     }
 
     @Override
-    public de.seven.search.domain.model.Product findById(String productId) {
-        return Optional.ofNullable(entityManager.find(Product.class, productId)).orElse(Product.builder().build()).toDomainProduct();
+    public Product findById(String productId) {
+        return Optional.ofNullable(entityManager.find(ProductDTO.class, productId)).orElse(ProductDTO.builder().build()).toDomainProduct();
     }
 
     @Override
-    public List<de.seven.search.domain.model.Product> findAll() {
+    public List<Product> findAll() {
         String jpql = "SELECT p FROM Product p";
-        TypedQuery<Product> query = entityManager.createQuery(jpql, Product.class);
-        return query.getResultList().stream().map(Product::toDomainProduct).toList();
+        TypedQuery<ProductDTO> query = entityManager.createQuery(jpql, ProductDTO.class);
+        return query.getResultList().stream().map(ProductDTO::toDomainProduct).toList();
     }
 
     @Override
     public void delete(String productId) {
-        entityManager.remove(entityManager.find(Product.class, productId));
+        entityManager.remove(entityManager.find(ProductDTO.class, productId));
     }
 }
 

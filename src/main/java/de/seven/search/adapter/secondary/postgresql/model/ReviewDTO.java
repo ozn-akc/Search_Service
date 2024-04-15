@@ -1,5 +1,6 @@
 package de.seven.search.adapter.secondary.postgresql.model;
 
+import de.seven.search.domain.model.Review;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,14 +9,13 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity(name = "Review")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Review {
+public class ReviewDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
@@ -25,15 +25,15 @@ public class Review {
     Integer score;
     String userId;
 
-    public de.seven.search.domain.model.Review toDomainReview() {
-        return de.seven.search.domain.model.Review.builder()
+    public Review toDomainReview() {
+        return Review.builder()
                 .score(score)
                 .userId(userId)
                 .build();
     }
 
-    public static Review fromDomainReview(de.seven.search.domain.model.Review domainReview) {
-        return Review.builder()
+    public static ReviewDTO fromDomainReview(Review domainReview) {
+        return ReviewDTO.builder()
                 .userId(domainReview.getUserId())
                 .score(domainReview.getScore())
                 .build();

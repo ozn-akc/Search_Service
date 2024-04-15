@@ -1,5 +1,6 @@
 package de.seven.search.adapter.secondary.postgresql.model;
 
+import de.seven.search.domain.model.Product;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,34 +26,34 @@ import java.util.Optional;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Product {
+public class ProductDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String productId;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "productId")
-    List<Image> images;
+    List<ImageDTO> images;
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    Price price;
+    PriceDTO price;
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    Address address;
+    AddressDTO address;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "productId")
-    List<Review> reviews;
+    List<ReviewDTO> reviews;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "productId")
-    List<RentedDay> rentedDays;
+    List<RentedDayDTO> rentedDays;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "productId")
-    List<Attribute> attributes;
+    List<AttributeDTO> attributes;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "productId")
-    List<Bed> beds;
+    List<BedDTO> beds;
     Integer bedrooms;
     Integer bathrooms;
 
-    public de.seven.search.domain.model.Product toDomainProduct(){
-        return de.seven.search.domain.model.Product.builder()
+    public Product toDomainProduct(){
+        return Product.builder()
                 .productId(productId)
                 .images(Optional.ofNullable(images)
                         .orElse(Collections.emptyList())
@@ -60,15 +61,15 @@ public class Product {
                         .map(image -> image.url)
                         .toList())
                 .price(Optional.ofNullable(price)
-                        .map(Price::toDomainPrice)
+                        .map(PriceDTO::toDomainPrice)
                         .orElse(null))
                 .address(Optional.ofNullable(address)
-                        .map(Address::toDomainAddress)
+                        .map(AddressDTO::toDomainAddress)
                         .orElse(null))
                 .reviews(Optional.ofNullable(reviews)
                         .orElse(Collections.emptyList())
                         .stream()
-                        .map(Review::toDomainReview)
+                        .map(ReviewDTO::toDomainReview)
                         .toList())
                 .rentedDays(Optional.ofNullable(rentedDays)
                         .orElse(Collections.emptyList())
@@ -78,7 +79,7 @@ public class Product {
                 .beds(Optional.ofNullable(beds)
                         .orElse(Collections.emptyList())
                         .stream()
-                        .map(Bed::toDomainBed)
+                        .map(BedDTO::toDomainBed)
                         .toList())
                 .attributes(Optional.ofNullable(attributes)
                         .orElse(Collections.emptyList())
@@ -90,14 +91,14 @@ public class Product {
                 .build();
     }
 
-    public static Product fromDomainProduct(de.seven.search.domain.model.Product domainProduct) {
-        Product product = Product.builder()
+    public static ProductDTO fromDomainProduct(Product domainProduct) {
+        ProductDTO product = ProductDTO.builder()
                 .productId(domainProduct.getProductId())
                 .images(
                         Optional.ofNullable(domainProduct.getImages())
                                 .orElse(Collections.emptyList())
                                 .stream()
-                                .map(image -> Image.builder().url(image).build())
+                                .map(image -> ImageDTO.builder().url(image).build())
                                 .toList()
                 )
                 .bathrooms(domainProduct.getBathrooms())
@@ -106,36 +107,36 @@ public class Product {
                         Optional.ofNullable(domainProduct.getBeds())
                                 .orElse(Collections.emptyList())
                                 .stream()
-                                .map(Bed::fromDomainBed)
+                                .map(BedDTO::fromDomainBed)
                                 .toList()
                 )
                 .attributes(
                         Optional.ofNullable(domainProduct.getAttributes())
                                 .orElse(Collections.emptyList())
                                 .stream()
-                                .map(attribute -> Attribute.builder().attribute(attribute).build())
+                                .map(attribute -> AttributeDTO.builder().attribute(attribute).build())
                                 .toList()
                 )
                 .rentedDays(
                         Optional.ofNullable(domainProduct.getRentedDays())
                                 .orElse(Collections.emptyList())
                                 .stream()
-                                .map(rentedDay -> RentedDay.builder().day(rentedDay).build())
+                                .map(rentedDay -> RentedDayDTO.builder().day(rentedDay).build())
                                 .toList()
                 )
                 .reviews(
                         Optional.ofNullable(domainProduct.getReviews())
                                 .orElse(Collections.emptyList())
                                 .stream()
-                                .map(Review::fromDomainReview)
+                                .map(ReviewDTO::fromDomainReview)
                                 .toList()
                 )
                 .build();
         product.setPrice(Optional.ofNullable(domainProduct.getPrice())
-                .map(price -> Price.fromDomainPrice(price, product))
+                .map(price -> PriceDTO.fromDomainPrice(price, product))
                 .orElse(null));
         product.setAddress(Optional.ofNullable(domainProduct.getAddress())
-                .map(address -> Address.fromDomainAddress(address, product))
+                .map(address -> AddressDTO.fromDomainAddress(address, product))
                 .orElse(null));
         return product;
     }

@@ -1,5 +1,6 @@
 package de.seven.search.adapter.secondary.postgresql.model;
 
+import de.seven.search.domain.model.Address;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -7,33 +8,32 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity(name = "Address")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address {
+public class AddressDTO {
     @Id
     private String id;
 
     @OneToOne
     @JoinColumn(name = "productId")
     @MapsId
-    private Product product;
+    private ProductDTO product;
     String country;
     String city;
 
-    public de.seven.search.domain.model.Address toDomainAddress() {
-        return de.seven.search.domain.model.Address.builder()
+    public Address toDomainAddress() {
+        return Address.builder()
                 .city(city)
                 .country(country)
                 .build();
     }
 
-    public static Address fromDomainAddress(de.seven.search.domain.model.Address domainAddress, Product product) {
-        return Address.builder()
+    public static AddressDTO fromDomainAddress(Address domainAddress, ProductDTO product) {
+        return AddressDTO.builder()
                 .city(domainAddress.getCity())
                 .country(domainAddress.getCountry())
                 .product(product)

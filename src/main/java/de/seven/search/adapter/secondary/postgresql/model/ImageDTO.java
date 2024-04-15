@@ -8,14 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "Attribute")
+@Entity(name = "Image")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Attribute {
+public class ImageDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     String productId;
-    de.seven.search.domain.model.Attribute attribute;
+    String url;
 }
