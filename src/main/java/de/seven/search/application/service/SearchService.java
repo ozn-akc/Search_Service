@@ -4,11 +4,13 @@ import de.seven.search.application.adapter.secondary.ProductRepository;
 import de.seven.search.application.model.FilterCriteria;
 import de.seven.search.application.model.SearchCriteria;
 import de.seven.search.domain.model.Product;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class SearchService {
     private final ProductRepository productRepository;
 
