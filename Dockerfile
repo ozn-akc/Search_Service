@@ -6,4 +6,6 @@ RUN gradle build
 FROM openjdk:21-ea-jdk
 VOLUME /tmp
 COPY --from=build home/gradle/build/libs/search.jar app.jar
-ENTRYPOINT ["java","-Dspring.profiles.active=postgresql","-jar","/app.jar"]
+ENV ACTIVE_PROFILES=http,postgresql
+
+ENTRYPOINT ["java","-jar","/app.jar", "--spring.profiles.active=${ACTIVE_PROFILES}"]
