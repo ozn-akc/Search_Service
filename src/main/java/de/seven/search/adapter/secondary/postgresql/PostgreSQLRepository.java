@@ -5,6 +5,7 @@ import de.seven.search.adapter.secondary.postgresql.model.ProductDTO;
 import de.seven.search.domain.model.Product;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
@@ -19,9 +20,10 @@ public class PostgreSQLRepository implements ProductRepository {
     private final EntityManager entityManager;
 
     @Override
+    @Transactional
     public Product save(Product product) {
         ProductDTO data = ProductDTO.fromDomainProduct(product);
-        entityManager.persist(data);
+        entityManager.merge(data);
         entityManager.flush();
         return data.toDomainProduct();
     }
