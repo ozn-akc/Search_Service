@@ -17,7 +17,7 @@ import java.util.List;
 public class ProductDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    String productId;
+    String id;
     List<String> images;
     Price price;
     Address address;
@@ -30,7 +30,7 @@ public class ProductDTO {
 
     public Product toDomainProduct(){
         return Product.builder()
-                .productId(productId)
+                .productId(id)
                 .images(images)
                 .price(price)
                 .address(address)
@@ -45,7 +45,7 @@ public class ProductDTO {
 
     public static ProductDTO fromDomainProduct(Product domainProduct) {
         return ProductDTO.builder()
-                .productId(domainProduct.getProductId())
+                .id(domainProduct.getProductId())
                 .images(domainProduct.getImages())
                 .price(domainProduct.getPrice())
                 .address(domainProduct.getAddress())
